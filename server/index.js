@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+
 const cors = require('cors');
+const CalorieModel = require('./models/model');
 
 require('dotenv').config({ path: './config.env' });
 const port = process.env.PORT || 5001;
@@ -11,9 +13,11 @@ app.use(express.json());
 
 //mongoDB COnnection
 const con = require('./db/connection.js');
+const { default: mongoose } = require('mongoose');
 
 //using routes
 app.use(require('./routes/route.js'));
+
 
 con
   .then((db) => {
@@ -32,3 +36,4 @@ con
     console.log(`Connection Failed...!${error}`);
     //error in mongodb connection
   });
+

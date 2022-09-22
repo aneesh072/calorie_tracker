@@ -1,18 +1,15 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const calorie_model = new Schema({
+const CalorieSchema = new mongoose.Schema({
   name: {
     type: String,
-    default: 'Anonymous',
+    required: false,
   },
   amount: {
-    type: Number,
+    type: String,
+    required: false,
   },
-  date: { type: Date, default: Date.now },
 });
 
-const CalorieList = mongoose.model('calorie', calorie_model);
-
-exports.default = CalorieList;
+const CalorieModel = mongoose.model('calories', CalorieSchema);
+module.exports = CalorieModel;
