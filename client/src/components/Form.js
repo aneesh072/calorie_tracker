@@ -6,7 +6,22 @@ import Axios from 'axios';
 const Form = () => {
   const { register, handleSubmit, resetField } = useForm();
 
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState(0);
   const [calorieList, setCalorieList] = useState([]);
+
+  const addFood = () => {
+    Axios.post('http://localhost:8000/api/addCalorie', {
+      name: name,
+      amount: amount,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const finalList = useEffect(() => {
     Axios.get('http://localhost:8000/api/addCalorie')
@@ -24,12 +39,14 @@ const Form = () => {
   return (
     <div className="form max-w-sm mx-auto w-96">
       <h1 className="font-bold pb-4 text-xl"> Calorie Consumption</h1>
-      <form id="form" onSubmit={handleSubmit(onSubmit)}>
+      <form id="form" onSubmit={addFood}>
         <div className="grid gap-4">
           <div className="input-group">
             <input
               type="text"
-              {...register('name')}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
               placeholder="Food name..."
               className="form-input"
             ></input>
@@ -37,9 +54,12 @@ const Form = () => {
           <div className="input-group">
             <input
               type="text"
-              {...register('amount')}
+              onChange={(e) => {
+                setAmount(e.target.value);
+              }}
               placeholder="Calorie amount"
               className="form-input"
+              required
             ></input>
           </div>
           <div className="submit-btn">
