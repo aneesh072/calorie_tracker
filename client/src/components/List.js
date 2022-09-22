@@ -1,21 +1,11 @@
 import React from 'react';
 import 'boxicons';
 
-const obj = [
-  {
-    name: 'Food 1',
-    amount: 345,
-  },
-  {
-    name: 'Food 2',
-    amount: 1231,
-  },
-];
-const List = () => {
+const List = ({ calorieList }) => {
   return (
     <div className="flex flex-col py-6 gap-3">
       <h1 className="py-4 font-bold text-xl">History</h1>
-      {obj.map((value, index) => (
+      {calorieList.map((value, index) => (
         <CalorieIntake key={index} category={value} />
       ))}
     </div>

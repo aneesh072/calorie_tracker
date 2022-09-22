@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import List from './List';
+import Axios from 'axios';
 
 const Form = () => {
   const { register, handleSubmit, resetField } = useForm();
+
+  const [calorieList, setCalorieList] = useState([]);
+
+  const finalList = useEffect(() => {
+    Axios.get('http://localhost:8000/api/addCalorie')
+      .then((response) => {
+        setCalorieList(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      }, []);
+  });
 
   const onSubmit = (data) => {
     console.log(data);
@@ -36,7 +49,7 @@ const Form = () => {
           </div>
         </div>
       </form>
-      <List />
+      <List calorieList={calorieList} />
     </div>
   );
 };
