@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Axios from 'axios';
 const obj = [
   {
     color: '#f9c74f',
@@ -13,6 +14,17 @@ const obj = [
 ];
 
 const Label = () => {
+  useEffect(() => {
+    Axios.get('http://localhost:8000/api/addCalorie')
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      }, []);
+  });
+
   return (
     <>
       {obj.map((value, index) => (
@@ -22,7 +34,7 @@ const Label = () => {
   );
 };
 
-const LabelComponent = ({data}) => {
+const LabelComponent = ({ data }) => {
   if (!data) return <></>;
   return (
     <div className="labels flex justify-between">
