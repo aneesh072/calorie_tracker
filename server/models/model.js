@@ -6,7 +6,7 @@ const CalorieSchema = new mongoose.Schema({
     required: false,
   },
   amount: {
-    type: String,
+    type: Number,
     required: false,
   },
 });

@@ -1,52 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-const obj = [
-  {
-    color: '#f9c74f',
-    type: 'Taken',
-    percent: 45,
-  },
-  {
-    color: 'rgb(54, 162, 235)',
-    type: 'Remaining',
-    percent: 55,
-  },
-];
 
 const Label = () => {
+  const [totalCal, setTotalcal] = useState(0);
+  console.log(totalCal);
+
   useEffect(() => {
     Axios.get('http://localhost:8000/api/addCalorie')
       .then((response) => {
         const data = response.data;
-        console.log(data);
+        let sum = 0;
+        const totalCalorie = data.forEach((element) => (sum += element.amount));
+        setTotalcal(sum);
       })
-      .catch((error) => {
-        console.log(error);
-      }, []);
+
+      .catch(
+        (error) => {
+          console.log(error);
+        },
+        [totalCal]
+      );
   });
+
+  //  let sum = 0;
+  //const totalCalorie = data.forEach((element) => (sum += element.amount));
 
   return (
     <>
-      {obj.map((value, index) => (
-        <LabelComponent key={index} data={value} />
-      ))}
-    </>
-  );
-};
-
-const LabelComponent = ({ data }) => {
-  if (!data) return <></>;
-  return (
-    <div className="labels flex justify-between">
-      <div className="flex gap-2">
-        <div
-          className="w-2 h-2 rounded py-3"
-          style={{ background: data.color ?? '#f9c74f' }}
-        ></div>
-        <h3 className="text-md">{data.type ?? ''}</h3>
+      <div className="labels flex justify-between">
+        <div className="flex gap-2">
+          <div className="w-2 h-2 rounded py-3"></div>
+          <h3 className="text-md">Taken</h3>
+        </div>
+        <h3 className="font-bold">{totalCal}</h3>
       </div>
-      <h3 className="font-bold">{data.percent ?? 0}%</h3>
-    </div>
+      <div className="labels flex justify-between">
+        <div className="flex gap-2">
+          <div className="w-2 h-2 rounded py-3"></div>
+          <h3 className="text-md">Remaining</h3>
+        </div>
+        <h3 className="font-bold">{totalCal}</h3>
+      </div>
+    </>
   );
 };
 
