@@ -1,38 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
-const Label = () => {
-  const [totalCal, setTotalcal] = useState(0);
-  console.log(totalCal);
-
-  useEffect(() => {
-    Axios.get('http://localhost:8000/api/addCalorie')
-      .then((response) => {
-        const data = response.data;
-        let sum = 0;
-        const totalCalorie = data.forEach((element) => (sum += element.amount));
-        setTotalcal(sum);
-      })
-
-      .catch((error) => {
-        console.log(error);
-      }, []);
-  });
+const Label = ({ goal, totalCal }) => {
   return (
     <>
       <div className="labels flex justify-between">
         <div className="flex gap-2">
           <div className="w-2 h-2 rounded py-3"></div>
-          <h3 className="text-md">Consumed</h3>
+          <h3 className="text-md">Goal</h3>
         </div>
-        <h3 className="font-bold">{totalCal} Cal</h3>
+        <h3 className="font-bold">{goal} Cal</h3>
       </div>
       <div className="labels flex justify-between">
         <div className="flex gap-2">
           <div className="w-2 h-2 rounded py-3"></div>
-          <h3 className="text-md">Remaining</h3>
+          <h3 className="text-md">Consumed</h3>
         </div>
-        <h3 className="font-bold">{totalCal} Cal</h3>
+        <h3 className="font-bold" style={{ color: '#f9c74f' }}>
+          {totalCal} Cal
+        </h3>
       </div>
     </>
   );
