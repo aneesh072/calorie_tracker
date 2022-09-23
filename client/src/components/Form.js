@@ -28,14 +28,25 @@ const Form = () => {
       .then((response) => {
         setCalorieList(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      }, []);
+      .catch(
+        (error) => {
+          console.log(error);
+        },
+        [calorieList]
+      );
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const deleteCalorie = (id) => {
+    Axios.delete(`http://localhost:8000/api/addCalorie/${id}`).then(() => {
+      setCalorieList(
+        calorieList.filter((val) => {
+          return val._id !== id;
+        })
+      );
+    });
+    window.location.reload(false);
   };
+
   return (
     <div className="form max-w-sm mx-auto w-96">
       <h1 className="font-bold pb-4 text-xl"> Calorie Consumption</h1>
@@ -69,7 +80,7 @@ const Form = () => {
           </div>
         </div>
       </form>
-      <List calorieList={calorieList} />
+      <List calorieList={calorieList} deleteCalorie={deleteCalorie} />
     </div>
   );
 };

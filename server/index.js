@@ -15,6 +15,12 @@ app.use(express.json());
 const con = require('./db/connection.js');
 const { default: mongoose } = require('mongoose');
 
+app.delete('/api/addCalorie/:id', async (req, res) => {
+  const id = req.params.id;
+  await CalorieModel.findByIdAndDelete(id).exec();
+  res.send('Itme Deleted');
+});
+
 //using routes
 app.use(require('./routes/route.js'));
 

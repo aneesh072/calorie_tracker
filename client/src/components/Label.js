@@ -14,32 +14,25 @@ const Label = () => {
         setTotalcal(sum);
       })
 
-      .catch(
-        (error) => {
-          console.log(error);
-        },
-        [totalCal]
-      );
+      .catch((error) => {
+        console.log(error);
+      }, []);
   });
-
-  //  let sum = 0;
-  //const totalCalorie = data.forEach((element) => (sum += element.amount));
-
   return (
     <>
       <div className="labels flex justify-between">
         <div className="flex gap-2">
           <div className="w-2 h-2 rounded py-3"></div>
-          <h3 className="text-md">Taken</h3>
+          <h3 className="text-md">Consumed</h3>
         </div>
-        <h3 className="font-bold">{totalCal}</h3>
+        <h3 className="font-bold">{totalCal} Cal</h3>
       </div>
       <div className="labels flex justify-between">
         <div className="flex gap-2">
           <div className="w-2 h-2 rounded py-3"></div>
           <h3 className="text-md">Remaining</h3>
         </div>
-        <h3 className="font-bold">{totalCal}</h3>
+        <h3 className="font-bold">{totalCal} Cal</h3>
       </div>
     </>
   );
