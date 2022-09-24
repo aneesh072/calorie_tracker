@@ -23,10 +23,10 @@ function App() {
           Calorie Tracker
         </h1>
         <button
-          className="border py-2 text-white bg-indigo-500 w-20"
+          className="border py-3 px-3 mb-8 text-white bg-indigo-500 rounded-lg"
           onClick={setGoalSubmit}
         >
-          Set Goal
+          Click Me to Set Goal
         </button>
         <div className="grid md:grid-cols-2 gap-4">
           <Graph goal={goal} />

@@ -74,7 +74,7 @@ const Form = () => {
             ></input>
           </div>
           <div className="submit-btn">
-            <button className="border py-2 text-white bg-indigo-500 w-full">
+            <button className="border py-2 text-white bg-green-400 w-full">
               Add
             </button>
           </div>
