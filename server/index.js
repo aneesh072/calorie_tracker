@@ -5,12 +5,20 @@ const cors = require('cors');
 const CalorieModel = require('./models/model');
 
 require('dotenv').config({ path: './config.env' });
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 80;
 
 //use middleware
-app.use(cors({ origin: 'https://calorie-tracker-mern.netlify.app' }));
+app.use(cors());
 app.use(express.json());
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 //mongoDB COnnection
 const con = require('./db/connection.js');
 const { default: mongoose } = require('mongoose');
@@ -23,7 +31,6 @@ app.delete('/api/addCalorie/:id', async (req, res) => {
 
 //using routes
 app.use(require('./routes/route.js'));
-
 
 con
   .then((db) => {
@@ -42,4 +49,3 @@ con
     console.log(`Connection Failed...!${error}`);
     //error in mongodb connection
   });
-

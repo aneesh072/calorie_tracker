@@ -9,7 +9,7 @@ Chart.register(ArcElement);
 const Graph = ({ goal }) => {
   const [totalCal, setTotalcal] = useState(0);
   useEffect(() => {
-    Axios.get('http://localhost:8000/api/addCalorie')
+    Axios.get('http://localhost:8001/api/addCalorie')
       .then((response) => {
         const data = response.data;
         let sum = 0;

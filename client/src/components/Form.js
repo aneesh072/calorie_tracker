@@ -8,7 +8,7 @@ const Form = () => {
   const [calorieList, setCalorieList] = useState([]);
 
   const addFood = () => {
-    Axios.post('http://localhost:8000/api/addCalorie', {
+    Axios.post('http://localhost:8001/api/addCalorie', {
       name: name,
       amount: amount,
     })
@@ -21,7 +21,7 @@ const Form = () => {
   };
 
   useEffect(() => {
-    Axios.get('http://localhost:8000/api/addCalorie')
+    Axios.get('http://localhost:8001/api/addCalorie')
       .then((response) => {
         setCalorieList(response.data);
       })
@@ -34,7 +34,7 @@ const Form = () => {
   });
 
   const deleteCalorie = (id) => {
-    Axios.delete(`http://localhost:8000/api/addCalorie/${id}`).then(() => {
+    Axios.delete(`http://localhost:8001/api/addCalorie/${id}`).then(() => {
       setCalorieList(
         calorieList.filter((val) => {
           return val._id !== id;
