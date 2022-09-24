@@ -13,7 +13,8 @@ const Graph = ({ goal }) => {
       .then((response) => {
         const data = response.data;
         let sum = 0;
-        const totalCalorie = data.forEach((element) => (sum += element.amount));
+        data.forEach((element) => (sum += element.amount));
+
         setTotalcal(sum);
       })
 

@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import List from './List';
 import Axios from 'axios';
 
 const Form = () => {
-  const { register, handleSubmit, resetField } = useForm();
-
   const [name, setName] = useState('');
   const [amount, setAmount] = useState(0);
   const [calorieList, setCalorieList] = useState([]);
@@ -23,7 +20,7 @@ const Form = () => {
       });
   };
 
-  const finalList = useEffect(() => {
+  useEffect(() => {
     Axios.get('http://localhost:8000/api/addCalorie')
       .then((response) => {
         setCalorieList(response.data);
