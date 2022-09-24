@@ -8,7 +8,7 @@ require('dotenv').config({ path: './config.env' });
 const port = process.env.PORT || 5001;
 
 //use middleware
-app.use(cors());
+app.use(cors({ origin: 'https://calorie-tracker-mern.netlify.app' }));
 app.use(express.json());
 
 //mongoDB COnnection
